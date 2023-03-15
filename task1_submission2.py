@@ -45,13 +45,10 @@ def exec_regex_toc( file_book = None ) :
 		#r'(?:(?:VOLUME|PART|Part|Volume)(?:\s\w*))|(?:CHAPTER|Chapter)\s(?:(?:\w*\.)|(?:(?:XC|X?L|L?X{1,3})?(?:IX|I?V|V?I{1,3}?))).*'
 		match = re.findall(r'^(?:(VOLUME|PART|Part|Volume)((?:\s\w*)|(?:(?:XC|X?L|L?X{1,3})?(?:IX|I?V|V?I{1,3}?))))|^(CHAPTER|Chapter)\s((?:\w*)|(?:(?:XC|X?L|L?X{1,3})*(?:IX|I?V|V?I{1,3})*))[\.\s]*(.*)', readHandlelist[line])
 		# r'CHAPTER\s((?:\w*\.)|((?:XC|X?L|L?X{1,3})?(?:IX|I?V|V?I{1,3}?))).*'
-		if not match[0][4]:
+		if match:
 			if match not in listTOC:
 				listTOC.append(match)
-		else:
-			title_nextline = True
 		line += 1
-	print(listTOC)
 	for listtoc in listTOC:
 		for Volume , number_volume , _ , number_chapter , chapter_title in listtoc:
 			if Volume != '':
